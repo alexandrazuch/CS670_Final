@@ -4,12 +4,14 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import lyricsgenius
 
+# USE YOUR OWN APOTIFY API CREDENTIALS HERE
 cid ='2c0b10097189464099a83b04369468da'  # client id
 secret ='4da7dce8af804fc791c294051f3948e3'  # client secret
 
 client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
 sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
 
+# USE YOUR OWN GENIUS API CREDENTIALS HERE
 genius = lyricsgenius.Genius('XnSTkisZQcNClsYoKSfP9olERtqBU8-1_5ZyVS_3lmIFZXjJWZcdxdM6-pHEeVGn')
 
 top_usa = sp.playlist('spotify:playlist:37i9dQZEVXbLp5XoPON0wI')
