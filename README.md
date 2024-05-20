@@ -7,10 +7,9 @@ In order to understand song popularity, we have done an in depth analysis on wor
 
 
 ### Files
-audio_features_by_playlist.py
-divide_songs.py
-finding_averages.py
-lyrics_analysis.py
-lyrics_by_playlist.py
-Update lyrics_by_playlist.py
-sentiment_analysis.py
+audio_features_by_playlist.py <br />
+divide_songs.py <br />
+finding_averages.py <br />
+lyrics_analysis.py <br />
+lyrics_by_playlist.py <br />
+sentiment_analysis.py <br />
