@@ -1,5 +1,4 @@
 import lyricsgenius.song
-import pandas as pd
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import lyricsgenius
@@ -15,6 +14,7 @@ sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
 genius = lyricsgenius.Genius('xxx')
 
 top_usa = sp.playlist('spotify:playlist:37i9dQZEVXbLp5XoPON0wI')  # test playlist
+# top_usa = sp.playlist('spotify:playlist:49G54i94nAqUUsa57pHG4f')  # music mix
 
 def rid_feature(song):
     song_wo_feature = song
@@ -31,6 +31,7 @@ def audio_features_str(track_uri):
     final_string += 'DANCEABILITY = ' + str((sp.audio_features(tracks=[track_uri]))[0].get('danceability'))
     final_string += '\nSPEECHINESS = ' + str((sp.audio_features(tracks=[track_uri]))[0].get('speechiness'))
     final_string += '\nVALENCE = ' + str((sp.audio_features(tracks=[track_uri]))[0].get('valence'))
+    final_string += '\nPOPULARITY = ' + str((sp.audio_features(tracks=[track_uri]))[0].get('popularity'))
     return final_string
 
 track_names = []
@@ -52,21 +53,24 @@ for i, uri in enumerate(track_uris):
         f_positive.write(track_names[i] + ' by ' + artist_names[i])
         f_positive.write('\nLYRICSSTART\n')
         song = genius.search_song(track_names[i], artist_names[i])
-        f_positive.write(song.lyrics)
+        if not (song == None):
+            f_positive.write(song.lyrics)
         f_positive.write('\nLYRICSEND\n\n\n\n\n')
 
     elif (sp.audio_features(tracks=[uri]))[0].get('valence') < 0.33:
         f_negative.write(track_names[i] + ' by ' + artist_names[i])
         f_negative.write('\nLYRICSSTART\n')
         song = genius.search_song(track_names[i], artist_names[i])
-        f_negative.write(song.lyrics)
+        if not (song == None):
+            f_negative.write(song.lyrics)
         f_negative.write('\nLYRICSEND\n\n\n\n\n')
     
     else: 
         f_neutral.write(track_names[i] + ' by ' + artist_names[i])
         f_neutral.write('\nLYRICSSTART\n')
         song = genius.search_song(track_names[i], artist_names[i])
-        f_neutral.write(song.lyrics)
+        if not (song == None):
+            f_neutral.write(song.lyrics)
         f_neutral.write('\nLYRICSEND\n\n\n\n\n')
 
 f_positive.close()
